@@ -84,3 +84,61 @@ Show all databases:
 SHOW DATABASES;
 ```
 
+## Step 04:
+Create new table with foreign key
+
+* Set default storage engine for current secion
+
+```sql
+SET default_storage_engine = InnoDB;
+```
+
+* Create categories table
+
+```sql
+CREATE TABLE IF NOT EXISTS tb_categories(
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(50) NOT NULL
+) CHARACTER SET utf16 COLLATE utf16_unicode_ci ENGINE=InnoDB;
+```
+
+or 
+
+```sql
+CREATE TABLE IF NOT EXISTS tb_categories(
+  id INT AUTO_INCREMENT,
+  name VARCHAR(50) NOT NULL,
+  PRIMARY KEY (id)
+) CHARACTER SET utf16 COLLATE utf16_unicode_ci ENGINE=InnoDB;
+```
+
+* Create ***tb_products*** table have foreign key to reference to id of tb_categories
+
+```sql
+CREATE TABLE IF NOT EXISTS tb_products(
+  id INT AUTO_INCREMENT NOT NULL,
+  name VARCHAR(100) NOT NULL,
+  price INT NOT NULL,
+  cat_id INT NOT NULL, 
+  PRIMARY KEY (id),
+  FOREIGN KEY (cat_id) 
+    REFERENCES tb_categories(id) 
+    ON UPDATE CASCADE 
+    ON DELETE RESTRICT
+) CHARACTER SET utf16 COLLATE utf16_unicode_ci ENGINE=InnoDB;
+```
+
+* Show table
+
+```sql
+SHOW tables;
+```
+
+* Using __DESCRIBE__ command to show table structure
+
+```sql
+DESCRIBE table_name
+```
+
+
+
