@@ -42,12 +42,103 @@ Connect to Database on MySQL Docker Container
 ```shell
 mysql -u db_user -p
 ```
-List all user
+
+## Step 3:
+Create Database with command
+
 ```sql
-SELECT USER();
+CREATE {DATABASE | SCHEMA} [IF NOT EXISTS] db_name
+    [create_option] ...
+
+create_option: [DEFAULT] {
+    CHARACTER SET [=] charset_name
+  | COLLATE [=] collation_name
+  | ENCRYPTION [=] {'Y' | 'N'}
+}
 ```
+
+and now, we create databse ***db-product*** with command
+
+```sql
+CREATE DATABASE IF NOT EXISTS db_product
+CHARACTER SET utf16
+COLLATE utf16_unicode_ci;
+```
+
+Use database
+```sql
+use db_product;
+```
+
+Show current database:
+```sql
+SELECT DATABASE();
+```
+
+and drop database with command:
+```sql
+DROP DATABASE db_product;
+```
+Show all databases:
+```sql
+SHOW DATABASES;
+```
+
+## Step 04:
+Create new table with foreign key
+
+* Set default storage engine for current secion
+
+```sql
+SET default_storage_engine = InnoDB;
+```
+
+* Create categories table
+
+```sql
+CREATE TABLE IF NOT EXISTS tb_categories(
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(50) NOT NULL
+) CHARACTER SET utf16 COLLATE utf16_unicode_ci ENGINE=InnoDB;
+```
+
 or 
+
 ```sql
-SELECT CURRENT_USER();
+CREATE TABLE IF NOT EXISTS tb_categories(
+  id INT AUTO_INCREMENT,
+  name VARCHAR(50) NOT NULL,
+  PRIMARY KEY (id)
+) CHARACTER SET utf16 COLLATE utf16_unicode_ci ENGINE=InnoDB;
 ```
+
+* Create ***tb_products*** table have foreign key to reference to id of tb_categories
+
+```sql
+CREATE TABLE IF NOT EXISTS tb_products(
+  id INT AUTO_INCREMENT NOT NULL,
+  name VARCHAR(100) NOT NULL,
+  price INT NOT NULL,
+  cat_id INT NOT NULL, 
+  PRIMARY KEY (id),
+  FOREIGN KEY (cat_id) 
+    REFERENCES tb_categories(id) 
+    ON UPDATE CASCADE 
+    ON DELETE RESTRICT
+) CHARACTER SET utf16 COLLATE utf16_unicode_ci ENGINE=InnoDB;
+```
+
+* Show table
+
+```sql
+SHOW tables;
+```
+
+* Using __DESCRIBE__ command to show table structure
+
+```sql
+DESCRIBE table_name
+```
+
+
 
