@@ -71,3 +71,12 @@ Or
 ```shell
 SELECT CURRENT_USER();
 ```
+
+* When we want to run MySQL Docker Container
+
+```shell
+docker container start db-mysql
+```
+
+with __db-mysql__ is docker container name or container ID
+
