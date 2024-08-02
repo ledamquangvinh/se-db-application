@@ -1,11 +1,13 @@
 # Lab03 - Create and Access database on MySQL Docker Container
 
-
+Reference:
+* https://dev.mysql.com/doc/refman/8.4/en/creating-database.html
+* https://phoenixnap.com/kb/how-to-create-a-table-in-mysql
 
 ## Step 1:
 Install Client GUI Tool to access Database 
 
-* MySQL WorkBench: 
+* MySQL WorkBench: https://dev.mysql.com/downloads/workbench/
 * Azure Data Studio: https://learn.microsoft.com/en-us/azure-data-studio/download-azure-data-studio?view=sql-server-ver16&tabs=win-install%2Cwin-user-install%2Credhat-install%2Cwindows-uninstall%2Credhat-uninstall#download-azure-data-studio
 
   * Install Extension: 
@@ -140,5 +142,86 @@ SHOW tables;
 DESCRIBE table_name
 ```
 
+## Step 05:
+Using GUI Client tool to access to MySQL Docker Container Database
+
+### 5.1 - MySQL Workbench
+
+Download MySQL Workbench: [click here to download](https://dev.mysql.com/downloads/workbench/)
+
+![Home Screen of MySQL](./images/img_01.png)
+
+* Create connection to database with MySQL Workbench
+
+![Create Connection](./images/img_02.png)
+
+Click Test Connection Button to test
+
+![Alert successful](./images/img_03.png)
+
+Click OK button to save the connection
+
+* Connect to Database (database schema db_product)
+
+Click to connection with the created in above step to connect database
+
+![Connect to database](./images/img_04.png)
+
+* Using MySQL Work to access Database(database schema db_product)
+
+Create query to access database 
+![Create and Execute query](./images/img_05.png)
+
+* Create EER model (Database Diagram) with MySQL Workbench
+
+Create EER model from Database
+
+![Create EER](./images/img_06.png)
+
+Using connection which is create to connect database 
+
+![Choose Connection](./images/img_07.png)
+
+Choose Database to create EER model
+
+***Continue*** button to move to next step
+
+![Choose Database](./images/img_08.png)
+
+Click ***Continue*** button to end step
+
+***The EER is the same as below picture***
+
+![EER model](./images/img_09.png)
+
+### 5.2 - AZURE Data Studio
 
 
+Download Azure Data Studio: [click here to download](https://azure.microsoft.com/en-us/products/data-studio)
+
+* Install Extensions to access MySQL : 
+1.Install MySQL extention
+  ![Install MySQL extension](./images/img_10.png)
+
+2. Install SQL Database Project
+  ![Install SQL Database Project Extension](./images/img_11.png)
+
+* Create Connection to ***db_product*** database on MySQL Docker Container
+
+Fill information for connection 
+
+![connection information](./images/img_12.png)
+
+Click to ***Advanced...*** button to change port
+Change port to 3307 to forwarding port 3306 in MySQL Docker Container
+
+![change port 3307](./images/img_13.png)
+
+click to ***Connect*** to connect to ***db_product*** in MySQL Docker Container
+
+** Access to ***db_product*** 
+![Connect db_product](./images/img_14.png)
+
+* Create and execute query
+
+![Create and execute Query](./images/img_15.png)
