@@ -1,6 +1,8 @@
 # Lab 04 - Basic Query on MySQL 
 
-Reference: https://dev.mysql.com/doc/refman/8.4/en/sql-data-manipulation-statements.html
+Reference: 
+https://dev.mysql.com/doc/refman/8.4/en/sql-data-manipulation-statements.html
+https://www.w3schools.com/sql/
 
 
 ## 1 - Set working database 
@@ -111,6 +113,98 @@ WHERE p.cat_id = (SELECT id
 UPDATE tb_products
 SET name = 'Galaxy S25 Ultra'
 WHERE name like '%12 Pro Max';
+```
+
+## 6 - Create Store Procedure on MySQL
+Reference: https://dev.mysql.com/doc/refman/8.4/en/create-procedure.html
+
+* Syntax
+
+* Simple store procedure to get all data of ***tb_products***
+
+```sql
+CREATE PROCEDURE `sp_get_all_products`()
+BEGIN
+    SELECT * FROM tb_products;
+END;
+```
+
+* Call and execute store procedure
+```sql
+CALL PROCEDURE sp_get_all_products();
+```
+
+* Drop store procedure
+
+```sql
+DROP PROCEDURE sp_get_all_products;
+```
+
+***Cannot update or change store procedure in MySQL***
+
+* Get information of one product by product_id
+
+```sql
+CREATE PROCEDURE sp_get_product_by_id(
+  IN id INT,
+)
+BEGIN
+  SELECT p.id, p.name INTO name, p.price INTO price, c.name INTO cat_name
+  FROM tb_products p LEFT JOIN tb_categories c ON p.cat_id = c.id
+  WHERE p.id = id;
+END;
+---
+CALL sp_get_product_by_id(10);
+```
+
+* Count product have category name is "mobile"
+
+```sql
+CREATE PROCEDURE sp_count_product_by_category(
+  IN cat_name VARCHAR(50),
+  OUT num_product INT
+)
+BEGIN
+  SELECT COUNT(p.id) INTO num_product
+  FROM tb_products AS p LEFT JOIN tb_categories AS c ON p.cat_id = c.id
+  WHERE c.name = cat_name;
+END;
+--- execute the procedure
+CALL sp_count_product_by_category('mobile', @num_of_product);
+
+SELECT @num_of_product;
+```
+
+* Drop store procedure
+
+```sql
+DROP IF EXIST sp_count_product_by_category;
+```
+
+## 7 - Create Function in MySQL
+
+* Create function to count all product
+
+```sql
+-- Set DETERMINISTIC for GLOBAL 
+SET GLOBAL log_bin_trust_function_creators = 1;
+
+-- CREATE FUNCTIOn
+CREATE FUNCTION count_all() RETURNS INT
+BEGIN 
+    DECLARE total INT;
+    SET total = 0;
+    SELECT COUNT(id) INTO total FROM tb_products;
+    RETURN total;
+END;
+
+-- CALL FUNCTION
+SELECT count_all();
+```
+
+* Drop a function
+```sql
+DROP FUNCTION IF EXISTS count_all();
 ```
 
 
