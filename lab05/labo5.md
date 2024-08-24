@@ -75,6 +75,49 @@ LEFT JOIN tb_categories c
 ON p.cat_id = c.id;
 ```
 
+## 2 - Using GUI Test
+
+### 2.1 - Using MySQL Workbench
+
+#### 2.2.1 - Export Database with MySQL Workbench
+
+* Connect MySQL Docker Container with MySQL Workbench
+
+![Connect to Database wiht MySQL Workbench](./images/img-01.png)
+
+* In MySQL Workbench, in the ***Administration*** panel, select ***Data export*** and check ***Database db_product***
+
+![Choose Data Export](./images/img-02.png)
+
+* In right Panel of ***Administration Data Export***, choose database ***db_product*** and specification tables/all database, dump ***sStored Procedure/Trigger/Function*** and ***Data***. After that, choose host location to store SQL script file
+which is exported.
+
+![specified config to dump database](./images/img-03.png)
+
+
+### 2.1.1 - Import Database with MySQL Workbench
+
+* Connect to MySQL Docker Container with MySQL Workbench
+
+* In MySQL Workbench, in the ***Administrator*** choose ***Data Import/Restored***
+
+> Edit the SQL Script File because the script contain special code which is used define DELIMITER function
+
+> * Change name of the Database in script 
+
+>```sql
+>   CREATE DATABASE  IF NOT EXISTS `db_product_workbench` /*!40100 DEFAULT CHARACTER SET utf16 COLLATE utf16_unicode_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+>   USE `db_product_workbench`;
+>```
+
+> * Add the SQL Command before the line to create ***Delimiter ;;***
+> ```sql
+> SET Global log_bin_trust_function_creators = 1;
+>```
+
+* Specific database to import 
+
+![Specific databse to import](./images/img-04.png)
 
 
 
