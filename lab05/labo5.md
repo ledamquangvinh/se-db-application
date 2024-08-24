@@ -75,11 +75,9 @@ LEFT JOIN tb_categories c
 ON p.cat_id = c.id;
 ```
 
-## 2 - Using GUI Test
+## 2 - Using GUI Test MySQL Workbench
 
-### 2.1 - Using MySQL Workbench
-
-#### 2.2.1 - Export Database with MySQL Workbench
+#### 2.1 - Export Database with MySQL Workbench
 
 * Connect MySQL Docker Container with MySQL Workbench
 
@@ -95,7 +93,7 @@ which is exported.
 ![specified config to dump database](./images/img-03.png)
 
 
-### 2.1.1 - Import Database with MySQL Workbench
+### 2.2 - Import Database with MySQL Workbench
 
 * Connect to MySQL Docker Container with MySQL Workbench
 
@@ -119,6 +117,4 @@ which is exported.
 
 ![Specific databse to import](./images/img-04.png)
 
-
-
-
+> ***Azure Data Studio only export and import database for MS SQL SERVER***
