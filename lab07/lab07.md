@@ -21,3 +21,15 @@ WHERE h.TenHangSanXuat = 'Lamaze';
 ------------------------------------------------------------
 SELECT * FROM HangSanXuat_Lamaze;
 ```
+
+* Edit VIEW to get shop information of product
+
+```sql
+CREATE OR REPLACE VIEW HangSanXuat_Lamaze AS
+SELECT s.MaSanPham, s.TenSanPham, s.GiaSanPham, h.TenHangSanXuat, l.TenLoaiSanPham
+FROM SanPham s INNER JOIN HangSanXuat h ON s.MaHangSanXuat = h.MaHangSanXuat INNER JOIN LoaiSanPham l ON s.MaLoaiSanPham = l.MaLoaiSanPham
+WHERE h.TenHangSanXuat = 'Lamaze';
+------------------------------------------------------------
+SELECT * FROM HangSanXuat_Lamaze;
+```
+
