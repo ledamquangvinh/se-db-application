@@ -33,3 +33,8 @@ WHERE h.TenHangSanXuat = 'Lamaze';
 SELECT * FROM HangSanXuat_Lamaze;
 ```
 
+* Drop a VIEW 
+
+```sql
+DROP VIEW HangSanXuat_Lamaze; 
+```
