@@ -1,5 +1,6 @@
 # View in MySQL
 
+## 1 - Basic Syntax
 * In SQL VIEW is a virtue table base on the result set of an SQL statement. VIEW contais rows and colums, just like a real table. The field in the VIEW are fields from one or more real tables in database.
 
 * Create View Syntax
@@ -37,4 +38,60 @@ SELECT * FROM HangSanXuat_Lamaze;
 
 ```sql
 DROP VIEW HangSanXuat_Lamaze; 
+```
+## 2 - Advance VIEW implementation
+
+* Cannot Create a VIEW with Paramenter because VIEW is stored staic data after execute queries.
+
+* Example: Create VIEW to count the number of orders.
+
+```sql
+CREATE VIEW v_DemTongDonDatHang AS
+SELECT COUNT(MaDonDatHang) AS Total
+FROM DonDatHang;
+```
+
+* Select first time is 7 orders
+```sql
+SELECT * FROM v_DemTongDonDatHang;
+```
+
+* After that, we create new order
+```sql
+INSERT INTO DonDatHang(MaDonDatHang, NgayLap, TongThanhTien, MaTaiKhoan, MaTinhTrang) 
+VALUES ('240916001', NOW(), 1000, 1, 1);
+```
+
+* And select the second time, we will have 8 orders. So the view will auto update when have the request to select from view.
+```sql
+SELECT * FROM v_DemTongDonDatHang;
+```
+
+* Now we can use View for caching common data such as:
+    * Show top 5 latest products with view ***v_ProductLatest***
+    * Show top 5 best sellers with view ***v_ProductBestSeller***
+    * Show top 5 hottest products with view ***v_ProductHottestt***
+
+```sql
+CREATE OR REPLACE VIEW v_ProductLatest AS
+SELECT s.*
+FROM SanPham s
+ORDER BY NgayNhap DESC
+LIMIT 5
+
+------------------------------------------------------
+
+CREATE OR REPLACE VIEW v_ProductBestSeller AS
+SELECT s.*
+FROM SanPham s
+ORDER BY SoLuongBan DESC
+LIMIT 5
+
+------------------------------------------------------
+
+CREATE OR REPLACE VIEW v_ProductHottest AS
+SELECT s.*
+FROM SanPham s
+ORDER BY SoLuocXem DESC
+LIMIT 5
 ```
