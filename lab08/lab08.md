@@ -72,3 +72,9 @@ INSERT INTO tb_products(id, name, price, cat_id) VALUES (21, 'iPhone 16 PRO MAX'
 ```sql
 SELECT * FROM tb_report;
 ```
+
+* Drop Event to stop EVENT
+
+```sql
+DROP EVENT event_total_product_report_minute;
+```
